@@ -71,18 +71,14 @@ app.post('/', (req, res) => {
     }
   );
 
-  const email = req.body.email;
-  const first_name = req.body.first_name;
-  const last_name = req.body.last_name;
-
   const data = {
     members: [
       {
-      email_address: email,
+      email_address: req.body.email,
       status: "subscribed",
       merge_fields:{
-        FNAME: first_name,
-        LNAME: last_name
+        FNAME: req.body.first_name,
+        LNAME: req.body.last_name
       }
     }
   ]
@@ -90,18 +86,14 @@ app.post('/', (req, res) => {
   //mailchimp only accepts JSON, need to convert it to JSON
   var jsonData = JSON.stringify(data);
 
-    // // MailChimp Stuff
-    // 94aecf6a6bbdfdee24ec9a3fd3fa0fc6-us17
-  // const apiKey = "94aecf6a6bbdfdee24ec9a3fd3fa0fc6-us17";
-  // const list_id = "53ca52654e";
+  // MailChimp Stuff
   const url = "https://us17.api.mailchimp.com/3.0/lists/53ca52654e"
   const options = {
     method:"POST",
-    auth:"aa:15fa9f9ee79b0f8ad5757bc003430bbd-us17"
+    auth:"jainamb:15fa9f9ee79b0f8ad5757bc003430bbd-us17"
   }
 
   const request = https.request(url, options , (response)=>{
-
     response.on("data", (data)=> {
         console.log(JSON.parse(data))
     })
@@ -126,15 +118,8 @@ app.post('/', (req, res) => {
     res.redirect(`/regFailed`);
     throw new Error("Passwords do not match")
   }
-
-
-
 });
 
-app.listen(port, function(request, response) {
+app.listen(port, () => {
   console.log(`listening on port ${port}`);
 })
-
-// app.listen(port, () => {
-//   console.log(`listening on port ${port}`);
-// })
