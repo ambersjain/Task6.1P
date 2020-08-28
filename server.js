@@ -87,10 +87,10 @@ app.post('/', (req, res) => {
   var jsonData = JSON.stringify(data);
 
   // MailChimp Stuff
-  const url = "https://us17.api.mailchimp.com/3.0/lists/53ca52654e"
+  const url = "https://us17.api.mailchimp.com/3.0/lists/1a17321125"
   const options = {
     method: "POST",
-    auth: "jainamb:15fa9f9ee79b0f8ad5757bc003430bbd-us17"
+    auth: "jainamb:05c3d6b6efe96f0575bf51623ef35100-us17"
   }
 
   //Saving info to database
